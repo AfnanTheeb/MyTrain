@@ -1,0 +1,6 @@
+.DS_Store
+playground.xcworkspace
+*.xcworkspace
+*.xcplayground
+xcschememanagement.plist
+timeline.xctimeline
