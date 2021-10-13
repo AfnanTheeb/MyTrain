@@ -153,11 +153,11 @@ struct Client {
     // to stor all client reservations insaied array .
     var newTicket: [Ticket] = []
     //--------------------------------------------------
-    init (first_name : String , last_name : String , birth_year : Int , ID : Int) {
-        self.birthYear = birth_year
-        self.lastName = last_name
-        self.firstName = first_name
-        self.id = ID
+    init (firstName : String , lastName : String , birthYear : Int , id : Int) {
+        self.birthYear = birthYear
+        self.lastName = lastName
+        self.firstName = firstName
+        self.id = id
         
     } // end function init
     //---------------------------------------------------
@@ -172,47 +172,47 @@ class ReservationServices {
     
     
     //declertion Client to stor all clients reservations inside array .
-    var new_client: [Client] = []
+    var newClient: [Client] = []
     
     // function to add new client ..
-    func add_client (name1 : String , name2 : String , birthyear : Int , id : Int){
-        new_client.append(Client.init(first_name: name1, last_name: name2, birth_year: birthyear, ID: id))
+    func addClient (name1 : String , name2 : String , birthyear : Int , id : Int){
+        newClient.append(Client.init(firstName: name1, lastName: name2, birthYear: birthyear, id: id))
         print("done , adding new client")
     }
     
     
 //---------------------------------------------------
 //function to add ticket to a specific client
-    func Booking_new_ticket (From : Station , To : Station , Type : BookingType, clientid : Int ){
-        new_client[clientid].newTicket.append(Ticket(startStation: From , endStation: To , bookingType: Type))
+    func bookingNewTicket (from : Station , to : Station , type : BookingType, clientId : Int ){
+        newClient[clientId].newTicket.append(Ticket(startStation: from , endStation: to , bookingType: type))
         print ("Great you have new booking ,,,")
-        print_ticket(num_ticket: new_client[clientid].newTicket.count - 1 , clientid: clientid)
+        issueTicket(numTicket: newClient[clientId].newTicket.count - 1 , clientId: clientId)
     }
     
 //---------------------------------------------------
 // function to show details of ticket
-    func print_ticket (num_ticket : Int , clientid: Int) {
-        print("name : \(new_client[clientid].firstName + new_client[clientid].lastName)\tDeparture station: \(new_client[clientid].newTicket[num_ticket].startStation)\tArrival station: \(new_client[clientid].newTicket[num_ticket].endStation)")
-        print("Tyep : \(new_client[clientid].newTicket[num_ticket].bookingType)\t    Cost :\(new_client[clientid].newTicket[num_ticket].cost)     num_Teckit\(num_ticket)")
+    func issueTicket (numTicket : Int , clientId: Int) {
+        print("name : \(newClient[clientId].firstName + newClient[clientId].lastName)\tDeparture station: \(newClient[clientId].newTicket[numTicket].startStation)\tArrival station: \(newClient[clientId].newTicket[numTicket].endStation)")
+        print("Tyep : \(newClient[clientId].newTicket[numTicket].bookingType)\t    Cost :\(newClient[clientId].newTicket[numTicket].cost)     num_Teckit\(numTicket)")
     }
     
 //---------------------------------------------------
 //function to deleting a specific ticket to a specific client
-    func delet_ticket ( num_ticket : Int , clientid : Int){
-        new_client[clientid].newTicket.remove(at: num_ticket)
+    func deletTicket ( numTicket : Int , clientId : Int){
+        newClient[clientId].newTicket.remove(at: numTicket)
     }
     
 //---------------------------------------------------
 //function To view all reservations for a specific customer
-    func history(clientid : Int )
+    func history(clientId : Int )
     {
         
         print ("---------------------------")
-        print (" Hi mr/ms: \(new_client[clientid].firstName ) ,\nThis List of your reservations : ")
+        print (" Hi mr/ms: \(newClient[clientId].firstName ) ,\nThis List of your reservations : ")
         print("..............................")
-        for (index, _)  in new_client[clientid].newTicket.enumerated() {
+        for (index, _)  in newClient[clientId].newTicket.enumerated() {
             
-            print_ticket(num_ticket: index, clientid: clientid)
+            issueTicket(numTicket : index, clientId : clientId)
             print("---------------------------")
         }
     }// end function history
@@ -221,14 +221,14 @@ class ReservationServices {
 
 var afnan = ReservationServices()
 
-afnan.add_client(name1: "Afnan", name2: "Theb", Birthyear: 1995, id: 123456)
-afnan.Booking_new_ticket(From :.Makkah , To: .Jeedah, Type: .Economey, clientid: 0)
+afnan.addClient(name1: "Afnan", name2: "Theb", birthyear: 1995, id: 123456)
+afnan.bookingNewTicket(from :.Makkah , to: .Jeedah, type: .Economey, clientId: 0)
 
 
-afnan.Booking_new_ticket(From: .Madinah, To: .KAEC, Type: .Business, clientid: 0 )
-afnan.history(clientid: 0)
-afnan.delet_ticket(num_ticket: 0, clientid: 0)
-afnan.history(clientid: 0)
+afnan.bookingNewTicket(from: .Madinah, to: .KAEC, type: .Business, clientId: 0 )
+afnan.history(clientId: 0)
+afnan.deletTicket(numTicket: 0, clientId: 0)
+afnan.history(clientId: 0)
 // and time
 // discount for kids
 
