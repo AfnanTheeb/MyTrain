@@ -174,10 +174,12 @@ class ReservationServices {
     //declertion Client to stor all clients reservations inside array .
     var newClient: [Client] = []
     
+    
+    
     // function to add new client ..
     func addClient (name1 : String , name2 : String , birthyear : Int , id : Int){
         newClient.append(Client.init(firstName: name1, lastName: name2, birthYear: birthyear, id: id))
-        print("done , adding new client")
+        print("A new customer has been added successfully \n")
     }
     
     
@@ -185,7 +187,7 @@ class ReservationServices {
 //function to add ticket to a specific client
     func bookingNewTicket (from : Station , to : Station , type : BookingType, clientId : Int ){
         newClient[clientId].newTicket.append(Ticket(startStation: from , endStation: to , bookingType: type))
-        print ("Great you have new booking ,,,")
+        print("Great, your reservation has been confirmed ..\n")
         issueTicket(numTicket: newClient[clientId].newTicket.count - 1 , clientId: clientId)
     }
     
